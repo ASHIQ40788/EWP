@@ -6,14 +6,29 @@ using System.Threading.Tasks;
 
 namespace EmployeeWage
 {
-    class EmployeeWageCompute
+    public class EmployeeWageCompute
     {
         //constants
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;
 
-        public static int computeEmpWage(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+        private string company;
+        private int empRatePerHour;
+        private int numOfWorkingDays;
+        private int maxHoursPerMonth;
+        private int totalEmpWage;
+
+        public EmployeeWageCompute(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
         {
+            this.company = company;
+            this.empRatePerHour = empRatePerHour;
+            this.numOfWorkingDays = numOfWorkingDays;
+            this.maxHoursPerMonth = maxHoursPerMonth;
+        }
+        public void computeEmpWage()
+        {
+
+        
             //local Variables
             int empHrs = 0;
             int totalEmpHrs = 0;
@@ -49,14 +64,22 @@ namespace EmployeeWage
                 //totalEmpWage += empWage;
             }
 
-            int totalEmpWage = totalEmpHrs * empRatePerHour;
+            totalEmpWage = totalEmpHrs * this.empRatePerHour;
             Console.WriteLine("total emp Wage for company:" + company + "is:" + totalEmpWage);
-            return totalEmpWage;
+ 
+        }
+        public string toString()
+        {
+            return "total emp wage for company:" + this.company + "is:" + this.totalEmpWage;
         }
         static void Main(string[] args)
         {
-            computeEmpWage("DMart", 20, 2, 10);
-            computeEmpWage("Reliance", 10, 4, 20);
+            EmployeeWageCompute dMart = new EmployeeWageCompute("DMart", 20, 2, 10);
+            EmployeeWageCompute reliance = new EmployeeWageCompute("Reliance", 10, 4, 20);
+            dMart.computeEmpWage();
+            Console.WriteLine(dMart.toString());
+            reliance.computeEmpWage();
+            Console.WriteLine(reliance.toString());
             Console.ReadKey();
         }
 
